@@ -3,28 +3,26 @@ import React, { useContext, useEffect } from "react";
 import { convert2MoneyUnit } from "utils";
 
 const MoneyUnitItem = ({ id, money, count, type }) => {
-  useEffect(() => {
-    console.log(`${money} 아이템 렌더`);
-  });
-
-  const { onInsertCoin } = useContext(WalletDispatchContext);
-
-  const krMoney = convert2MoneyUnit(money, "kr");
+  const { onPushCoin } = useContext(WalletDispatchContext);
 
   const handleInsertMoney = () => {
-    onInsertCoin(id);
+    if (count <= 0) {
+      console.log("정지");
+      return;
+    }
+    onPushCoin(id);
   };
 
   return (
     <div key={id} className="flex justify-end items-center w-[90%]">
       <button
-        className={`${styledMoneyType(type)} btn btn--starbucks mr-10`}
+        className={`${styledMoneyType(type)} btn btn--starbucks leading-8 `}
         onClick={handleInsertMoney}
       >
-        {krMoney}원
+        {convert2MoneyUnit(money, "kr")}원
       </button>
-      <div>X</div>
-      <span className="w-[30%] text-right">{count}개</span>
+      <div className="">X</div>
+      <span className={`${styledNoCount(count)} w-[30%] text-right`}>{count}개</span>
     </div>
   );
 };
@@ -32,13 +30,19 @@ const MoneyUnitItem = ({ id, money, count, type }) => {
 const styledMoneyType = (type) => {
   switch (type) {
     case "coin":
-      return "rounded-full py-4 w-[30%]";
+      return "rounded-full w-[70px] h-[70px] mr-12 tracking-tight";
 
     case "bill":
-      return "rounded-none px-2 py-3 w-[50%]";
+      return "rounded-none w-[140px] h-[70px] mr-6";
 
     default:
       return;
+  }
+};
+
+const styledNoCount = (count) => {
+  if (count <= 0) {
+    return "empty-money";
   }
 };
 
