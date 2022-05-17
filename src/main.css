@@ -28,4 +28,10 @@
 }
 
 @layer utilities {
+  .empty-money {
+    @apply line-through decoration-4;
+  }
+
+  .empty-product {
+  }
 }
