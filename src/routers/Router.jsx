@@ -2,7 +2,7 @@ import NotFound from "pages/NotFound";
 import VendingMachine from "pages/VendingMachine";
 import Wallet from "pages/Wallet";
 import React from "react";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import App from "App";
 import WalletProvider from "contexts/WalletProvider";
@@ -11,7 +11,7 @@ const routes = [
   {
     page: <VendingMachine />,
     path: "/",
-    props: "index",
+    props: "index exact",
   },
   {
     page: <Wallet />,
@@ -20,23 +20,23 @@ const routes = [
   },
 ];
 
-const VMRouter = () => {
+const Router = () => {
   const location = useLocation();
 
   return (
-    <AnimatePresence exitBeforeEnter>
-      <WalletProvider>
+    <WalletProvider>
+      <AnimatePresence exitBeforeEnter>
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<App />}>
             {routes.map((route) => (
-              <Route key={route.path} path={route.path} {...route.props} element={route.page} />
+              <Route key={route.path} path={route.path} element={route.page} {...route.props} />
             ))}
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
-      </WalletProvider>
-    </AnimatePresence>
+      </AnimatePresence>
+    </WalletProvider>
   );
 };
 
-export default VMRouter;
+export default Router;

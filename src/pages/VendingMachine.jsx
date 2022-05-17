@@ -1,14 +1,14 @@
 import React from "react";
 import ProductStand from "components/VendingMachine/ProductStand";
 import VMInfo from "components/VendingMachine/VMInfo";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { pageTransition, pageVariants } from "helpers/animation";
 
 const VendingMachine = () => {
   return (
     <motion.div
       className="text-lg shadow-lg shadow-gray rounded-b-2xl"
-      initial="out"
+      initial="initial"
       animate="in"
       exit="out"
       variants={pageVariants(-100)}

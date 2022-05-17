@@ -1,6 +1,6 @@
-import React, { useContext, useMemo, useState } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import MoneyUnitItem from "components/Wallet/MoneyUnitItem";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { pageTransition, pageVariants } from "helpers/animation";
 import { WalletDispatchContext, WalletStateContext } from "contexts/WalletProvider";
 
@@ -9,8 +9,8 @@ const Wallet = () => {
 
   return (
     <motion.div
-      className="flex flex-col items-center max-w-xs gap-3 p-4 mx-auto text-2xl border-4 shadow-md rounded-3xl shadow-starbucks border-starbucks"
-      initial="out"
+      className="flex flex-col items-center max-w-xs gap-3 p-4 mx-auto text-2xl border-4 shadow-lg rounded-3xl shadow-gray border-starbucks"
+      initial="initial"
       animate="in"
       exit="out"
       variants={pageVariants(100)}
@@ -34,4 +34,4 @@ const TotalMoney = () => {
   );
 };
 
-export default React.memo(Wallet);
+export default Wallet;
