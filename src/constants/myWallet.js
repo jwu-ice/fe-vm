@@ -1,4 +1,4 @@
-export const MY_MONEY = [
+const MY_WALLET = [
   {
     id: 1,
     type: "coin",
@@ -48,3 +48,5 @@ export const MY_MONEY = [
     count: 1,
   },
 ];
+
+export default MY_WALLET;

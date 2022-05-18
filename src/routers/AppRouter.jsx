@@ -20,23 +20,21 @@ const routes = [
   },
 ];
 
-const Router = () => {
+const AppRouter = () => {
   const location = useLocation();
 
   return (
-    <WalletProvider>
-      <AnimatePresence exitBeforeEnter>
-        <Routes location={location} key={location.pathname}>
-          <Route path="/" element={<App />}>
-            {routes.map((route) => (
-              <Route key={route.path} path={route.path} element={route.page} {...route.props} />
-            ))}
-          </Route>
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </AnimatePresence>
-    </WalletProvider>
+    <AnimatePresence exitBeforeEnter>
+      <Routes location={location} key={location.pathname}>
+        <Route path="/" element={<App />}>
+          {routes.map((route) => (
+            <Route key={route.path} path={route.path} element={route.page} {...route.props} />
+          ))}
+        </Route>
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </AnimatePresence>
   );
 };
 
-export default Router;
+export default AppRouter;
