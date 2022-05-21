@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/fe-vm/static/css/main.5c787278.css",
-    "main.js": "/fe-vm/static/js/main.d31362af.js",
+    "main.css": "/fe-vm/static/css/main.06a8c08a.css",
+    "main.js": "/fe-vm/static/js/main.2e0223df.js",
     "static/media/nyancat+adventuretime.gif": "/fe-vm/static/media/nyancat+adventuretime.00ce685f6acf20719fea.gif",
-    "static/media/텅.png": "/fe-vm/static/media/텅.ad1c2131b4662b99f02c.png",
+    "static/media/텅.png": "/fe-vm/static/media/텅.890d246fc94fbad5a387.png",
     "index.html": "/fe-vm/index.html",
-    "main.5c787278.css.map": "/fe-vm/static/css/main.5c787278.css.map",
-    "main.d31362af.js.map": "/fe-vm/static/js/main.d31362af.js.map"
+    "main.06a8c08a.css.map": "/fe-vm/static/css/main.06a8c08a.css.map",
+    "main.2e0223df.js.map": "/fe-vm/static/js/main.2e0223df.js.map"
   },
   "entrypoints": [
-    "static/css/main.5c787278.css",
-    "static/js/main.d31362af.js"
+    "static/css/main.06a8c08a.css",
+    "static/js/main.2e0223df.js"
   ]
 }
