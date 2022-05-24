@@ -1,6 +1,6 @@
 import ProductList from "./ProductList";
 import ProductCategoryTab from "./ProductCategoryTab";
-import { useState } from "react";
+import React, { useState } from "react";
 
 const ProductStand = ({ products }) => {
   const [tabIndex, setTabIndex] = useState(1);

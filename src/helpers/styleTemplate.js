@@ -26,4 +26,6 @@ export const styledIsEmptyProduct = (count) => {
 export const styledBePurchase = (price, totalMoney) =>
   price <= totalMoney && "possible-purchase-product";
 
+export const styledFocusing = (url, path) => url === path && "bg-starbucks text-white";
+
 export const styledTab = () => {};

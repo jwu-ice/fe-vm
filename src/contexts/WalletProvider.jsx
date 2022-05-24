@@ -7,6 +7,12 @@ const reducer = (state, action) => {
     case "INIT":
       return action.data;
 
+    case "INCREASE":
+      const increasedCoins = state.map((coin) => {
+        return coin.id === action.targetId ? { ...coin, count: coin.count + 1 } : coin;
+      });
+      return increasedCoins;
+
     case "DECREASE":
       const decreasedCoins = state.map((coin) => {
         return coin.id === action.targetId ? { ...coin, count: coin.count - 1 } : coin;
