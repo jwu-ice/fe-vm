@@ -1,4 +1,4 @@
-import { BEVERAGE_CATEGORY } from "constants/product";
+import { BEVERAGE_CATEGORY } from "constants/beverageCategory";
 
 const ProductCategoryTab = ({ tabIndex, setTabIndex }) => {
   const handleTab = (id) => {

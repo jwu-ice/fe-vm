@@ -1,5 +1,5 @@
 import { MachineDispatchContext, MachineStateContext } from "contexts/MachineProvider";
-import { useContext } from "react";
+import React, { useContext } from "react";
 import { convertMoneyUnit } from "utils";
 import { styledBePurchase, styledIsEmptyProduct } from "helpers/styleTemplate";
 import EMPTY_IMG from "assets/텅.png";
@@ -32,4 +32,4 @@ const ProductItem = ({ id, image, name, price, count }) => {
   );
 };
 
-export default ProductItem;
+export default React.memo(ProductItem);

@@ -6,13 +6,12 @@ import { styledIsEmptyMoney, styledIsMoneyType } from "helpers/styleTemplate";
 
 const MoneyUnitItem = ({ id, money, count, type }) => {
   const { onPushCoin } = useContext(WalletDispatchContext);
-  const { onComeInCoin } = useContext(MachineDispatchContext);
+  const { onIncreaseMoneyInMachine } = useContext(MachineDispatchContext);
 
   const handleInsertMoney = () => {
     if (count <= 0) return;
-
     onPushCoin(id);
-    onComeInCoin(money);
+    onIncreaseMoneyInMachine(money);
   };
 
   return (

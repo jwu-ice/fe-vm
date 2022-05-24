@@ -13,8 +13,8 @@ const reducer = (state, action) => {
     case "MONEY_DECREASE":
       return { ...state, totalMoney: totalMoney - action.price };
 
-    case "RETURN":
-      return;
+    case "MONEY_RETURN":
+      return { ...state, totalMoney: 0 };
 
     case "HISTORY_ADD":
       const addedHistory = history;
@@ -42,7 +42,7 @@ const MachineProvider = ({ children }) => {
     dispatch({ type: "INIT", data: initMachineInfo });
   };
 
-  const onComeInCoin = useCallback((inputMoney) => {
+  const onIncreaseMoneyInMachine = useCallback((inputMoney) => {
     dispatch({ type: "MONEY_INCREASE", inputMoney });
   }, []);
 
@@ -50,12 +50,17 @@ const MachineProvider = ({ children }) => {
     dispatch({ type: "MONEY_DECREASE", price });
   }, []);
 
+  const onReturnMoney = useCallback(() => {
+    dispatch({ type: "MONEY_RETURN" });
+  }, []);
+
   const dispatches = useMemo(() => {
     return {
-      onComeInCoin,
+      onIncreaseMoneyInMachine,
       onDecreaseMoneyInMachine,
+      onReturnMoney,
     };
-  }, [onComeInCoin, onDecreaseMoneyInMachine]);
+  }, [onIncreaseMoneyInMachine, onDecreaseMoneyInMachine, onReturnMoney]);
 
   useEffect(() => {
     fetchMachineInfo();
