@@ -8,7 +8,7 @@ export const API = {
       ...config,
     });
   },
-  getMyWallet(config) {
+  getMoneyData(config) {
     return instance({
       url: "moneyData.json",
       method: "get",

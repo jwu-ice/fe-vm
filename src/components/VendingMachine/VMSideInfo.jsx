@@ -1,4 +1,5 @@
 import { MachineDispatchContext, MachineStateContext } from "contexts/MachineProvider";
+import { WalletDispatchContext } from "contexts/WalletProvider";
 import React, { useContext, useMemo } from "react";
 import { API, convertMoneyUnit } from "utils";
 
@@ -57,18 +58,31 @@ const InputMoneyBox = ({ totalMoneyKR }) => {
 
 const ReturnButton = ({ totalMoney }) => {
   const { onReturnMoney } = useContext(MachineDispatchContext);
-  // const isZeroMoney = totalMoney <= 0;
-  const isZeroMoney = false;
-  const handleReturnCoin = () => {
+  const { onPullCoin } = useContext(WalletDispatchContext);
+
+  const isZeroMoney = totalMoney <= 0;
+
+  const handleReturnCoin = async () => {
+    const { data: moneyData } = await API.getMoneyData();
+    const calcMoneyData = returnMoneyLogic(moneyData);
+    onPullCoin(calcMoneyData);
     onReturnMoney();
-    // 지갑에 들어가는 돈 로직
-    returnLogic(totalMoney);
   };
 
-  const returnLogic = async (totalMoney) => {
-    const { data: moneyData } = await API.getMyWallet();
-    const moneyUnitArr = moneyData.map(({ money }) => money);
-    console.log("moneyUnitArr", moneyUnitArr);
+  const returnMoneyLogic = (moneyData) => {
+    const returnMoneyData = moneyData.reduceRight((prev, curr) => {
+      const moneyUnit = curr.money;
+      const quotient = Math.floor(totalMoney / moneyUnit);
+
+      if (quotient > 0) {
+        totalMoney %= moneyUnit;
+        return [{ ...curr, count: quotient }, ...prev];
+      }
+
+      return prev;
+    }, []);
+
+    return returnMoneyData;
   };
 
   return (

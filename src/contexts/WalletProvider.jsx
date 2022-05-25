@@ -13,6 +13,13 @@ const reducer = (state, action) => {
       });
       return increasedCoins;
 
+    case "MULTI_INCREASE":
+      const multiIncreasedCoins = state.map((coin) => {
+        const targetData = action.pulledMoney.find(({ id }) => id === coin.id);
+        return targetData ? { ...coin, count: coin.count + targetData.count } : coin;
+      });
+      return multiIncreasedCoins;
+
     case "DECREASE":
       const decreasedCoins = state.map((coin) => {
         return coin.id === action.targetId ? { ...coin, count: coin.count - 1 } : coin;
@@ -33,7 +40,7 @@ const WalletProvider = ({ children }) => {
   const [wallet, dispatch] = useReducer(reducer, initialState);
 
   const fetchMyWallet = async () => {
-    const { data: moneyData } = await API.getMyWallet();
+    const { data: moneyData } = await API.getMoneyData();
 
     const initMoney = moneyData.map((moneyItem, index) => {
       // MY_WALLET에 있는 돈 개수 만큼 내 지갑에 돈이 들어옴.
@@ -47,11 +54,16 @@ const WalletProvider = ({ children }) => {
     dispatch({ type: "DECREASE", targetId });
   }, []);
 
+  const onPullCoin = useCallback((pulledMoney) => {
+    dispatch({ type: "MULTI_INCREASE", pulledMoney });
+  }, []);
+
   const dispatches = useMemo(() => {
     return {
       onPushCoin,
+      onPullCoin,
     };
-  }, [onPushCoin]);
+  }, [onPushCoin, onPullCoin]);
 
   useEffect(() => {
     fetchMyWallet();
